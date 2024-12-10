@@ -1,0 +1,21 @@
+
+.cardConteiner{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding: 0;
+}
+
+.cardPoke {
+    padding: 25px 10px;
+    border: 2px solid red;
+    transition: background-color 0.3s ease;
+    display: flex;
+    place-items: center;
+  }
+  
+.cardPoke:hover {
+background-color: #ffeeee;
+color:black
+}
