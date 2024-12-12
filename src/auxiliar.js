@@ -1,4 +1,4 @@
-const generateUniqueRandomNumbers = (count, min, max) => {
+const generateUniqueRandomNumbers = (count, min, max) => { // N° de Pokes consumidos , ID min , ID max
     const numbers = new Set();
     
     while (numbers.size < count) {

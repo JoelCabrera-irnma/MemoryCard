@@ -1,6 +1,6 @@
 export default function EndGameModal({ isVisible, onClose, message }) {
     if (!isVisible) return null; // No renderiza nada si no está visible
-  
+   
     return (
       <div className="overlay">
         <div className="modal">
