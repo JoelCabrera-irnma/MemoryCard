@@ -7,7 +7,7 @@ export default function EndGameModal({ isVisible, onClose, message }) {
           <h2>Fin del Juego</h2>
           <p>{message}</p>
           <button onClick={onClose} className="modal-button">
-            Volver al Inicio
+            Volver a Jugar
           </button>
         </div>
       </div>

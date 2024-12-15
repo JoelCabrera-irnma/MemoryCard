@@ -5,10 +5,12 @@ import "../styles/displayCard.css";
 import "../styles/modal.css";
 
 //Array de numeros de aleatorio por ejemplo entre 0 a 200
-const randomNumbers = generateUniqueRandomNumbers(8, 1, 200); //N° de Pokes consumidos , ID min , ID max
-const arryURLs = randomNumbers.map(
-  (item) => `https://pokeapi.co/api/v2/pokemon/${item}/`
-);
+const generateURLs = () => {
+  const randomNumbers = generateUniqueRandomNumbers(16, 1, 200); //N° de Pokes consumidos , ID min , ID max
+  return randomNumbers.map(
+    (item) => `https://pokeapi.co/api/v2/pokemon/${item}/`
+  );
+};
 let score = 0;
 
 function PokeRender({ params, endScore, lastScore }) {
@@ -16,38 +18,60 @@ function PokeRender({ params, endScore, lastScore }) {
   const [pokeList, setPokemonList] = useState(null);
   const [select, setSelect] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [maxScore,  setMaxScore] = useState(false)
-  const [reset, setReset] = useState(false)
+  const [maxScore, setMaxScore] = useState(false);
+  const [reset, setReset] = useState(false);
 
+  useEffect(() => {
+    const fetchPokemonData = async () => {
+      try {
+        const arryURLs = generateURLs();
+        // Obtener los datos de cada URL
+        const responses = await Promise.all(arryURLs.map((url) => fetch(url)));
+        const pokemonData = await Promise.all(
+          responses.map((res) => res.json())
+        );
+        const [a, b, c, d] = pokemonData;
 
-  //console.log(lastScore) 
+        //Set los 32 pokemon de base
+        setListBase(pokemonData);
+
+        //Set de los primero 4 pokemon
+        setPokemonList([a, b, c, d]);
+      } catch (error) {
+        console.error("Error al recuperar los datos:", error);
+      }
+    };
+    fetchPokemonData();
+  }, [reset]);
+
+  //console.log(lastScore)
 
   const resetValues = () => {
-      endScore();
-      setSelect([]);
-      score = 0
-  }
+    endScore();
+    setSelect([]);
+    score = 0;
+  };
   const selectValue = (value) => {
     //Fin del Juego
-    console.log(value,select)
+    console.log(value, select);
     if (select.includes(value)) {
       handleGameOver();
-      resetValues()
+      resetValues();
       return;
     }
     //Reordenar cartas
-    setSelect(preValues=>[...preValues,value]); //Corregir. Colocar-push en un array y verificar si existe
+    setSelect((preValues) => [...preValues, value]); //Corregir. Colocar-push en un array y verificar si existe
     const shuffle = [...pokeList].sort(() => Math.random() - 0.5);
     setPokemonList(shuffle);
     params(); //sumar score para el componente padre
     score++;
-      
+
     //console.log(score, listBase.length)
     //Maximo Valor alcanzado
-    if(score == listBase.length){
-      setMaxScore(true)
+    if (score == listBase.length) {
+      setMaxScore(true);
       handleGameOver();
-      return console.log("MAXIMO PUNTAJE ALCANZADO")
+      return console.log("MAXIMO PUNTAJE ALCANZADO");
     }
 
     //Verificar length del pokeList con el valor del score
@@ -67,30 +91,8 @@ function PokeRender({ params, endScore, lastScore }) {
     setIsGameOver(false);
     setMaxScore(false);
     resetValues();
-    setReset(!reset)
+    setReset(!reset);
   };
-
-  useEffect(() => {
-    const fetchPokemonData = async () => {
-      try {
-        // Obtener los datos de cada URL
-        const responses = await Promise.all(arryURLs.map((url) => fetch(url)));
-        const pokemonData = await Promise.all(
-          responses.map((res) => res.json())
-        );
-        const [a, b, c, d] = pokemonData;
-
-        //Set los 32 pokemon de base
-        setListBase(pokemonData);
-
-        //Set de los primero 4 pokemon
-        setPokemonList([a, b, c, d]);
-      } catch (error) {
-        console.error("Error al recuperar los datos:", error);
-      }
-    };
-    fetchPokemonData();
-  }, [reset]);
 
   return (
     <>
@@ -116,7 +118,11 @@ function PokeRender({ params, endScore, lastScore }) {
       <EndGameModal
         isVisible={isGameOver}
         onClose={handleCloseModal}
-        message={maxScore?`Maximo puntaje alcanzado`:`Este es tu puntaje: ${lastScore}`} //"¡Bien hecho, este es tu puntaje!"
+        message={
+          maxScore
+            ? `Maximo puntaje alcanzado`
+            : `Este es tu puntaje: ${lastScore}`
+        } 
       />
     </>
   );
