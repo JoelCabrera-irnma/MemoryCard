@@ -3,6 +3,9 @@
   margin: 0 auto;
   padding: 1rem;
   text-align: center;
+  display: flex;
+  place-items: center;
+  flex-direction: column;
 }
 
 .box-score{

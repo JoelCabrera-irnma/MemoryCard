@@ -4,7 +4,7 @@ import { generateUniqueRandomNumbers, getRandomElements } from "../auxiliar.js";
 import "../styles/displayCard.css";
 import "../styles/modal.css";
 
-//Array de numeros de aleatorio por ejemplo entre 0 a 200
+//Array de numeros de aleatorio por ejemplo entre 1 a 200
 const generateURLs = () => {
   const randomNumbers = generateUniqueRandomNumbers(16, 1, 200); //N° de Pokes consumidos , ID min , ID max
   return randomNumbers.map(

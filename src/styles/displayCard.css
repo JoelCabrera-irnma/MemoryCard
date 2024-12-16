@@ -1,21 +1,110 @@
+.cardConteiner {
+  width: 60em;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px;
+  justify-content: flex-end;
+  padding: 0;
+  --factor-multi: 1.1
+}     
 
-.cardConteiner{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    justify-content: center;
-    padding: 0;
-}
-
-.cardPoke {
+/* .cardPoke {
     padding: 25px 10px;
     border: 2px solid red;
     transition: background-color 0.3s ease;
     display: flex;
     place-items: center;
-  }
+}
   
 .cardPoke:hover {
 background-color: #ffeeee;
 color:black
+} */
+
+/* From Uiverse.io by Clenio21 */
+.cardPoke {
+  width: calc(190px * var(--factor-multi));
+  height: calc(254px * var(--factor-multi));
+  --border-radius: 15px;
+  --border-width: 4px;
+  appearance: none;
+  position: relative;
+  padding: 1em 2em;
+  border: 0;
+  background: rgb(5, 5, 22);
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  z-index: 2;
+  border-radius: 15px;
+  place-self: center;
+  transition: text-shadow 0.2s ease; /* Suaviza la transición del efecto */
+}
+.cardPoke:hover{
+  background-color: rgb(28, 20, 15);
+  text-shadow: 2px 2px 4px rgba(255, 255, 102, 0.7); 
+}
+
+.cardPoke::after {
+  --m-i: linear-gradient(#000, #000);
+  --m-o: content-box, padding-box;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: var(--border-width);
+  border-radius: var(--border-radius);
+  background-image: conic-gradient(
+    #488cfb,
+    #29dbbc,
+    #ddf505,
+    #ff9f0e,
+    #e440bb,
+    #655adc,
+    #488cfb
+  );
+  -webkit-mask-image: var(--m-i), var(--m-i);
+  mask-image: var(--m-i), var(--m-i);
+  -webkit-mask-origin: var(--m-o);
+  mask-origin: var(--m-o);
+  -webkit-mask-clip: var(--m-o);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  filter: hue-rotate(0);
+  animation: rotate-hue linear 500ms infinite;
+  animation-play-state: paused;
+}
+
+.cardPoke:hover::after {
+  animation-play-state: running;
+}
+
+@keyframes rotate-hue {
+  to {
+    filter: hue-rotate(1turn);
+  }
+}
+
+.cardPoke,
+.cardPoke::after {
+  box-sizing: border-box;
+}
+
+.cardPoke:active {
+  --border-width: 5px;
+}
+
+/* img, titulo e ID*/
+
+.card-img {
+  width: calc(6em * var(--factor-multi));
+}
+.card-title{
+  margin: 10px 0px;
+  font-size: 1.2em;
+}
+.card-id{
+  margin: 0px 0px;
 }
