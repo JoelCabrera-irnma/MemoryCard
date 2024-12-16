@@ -8,19 +8,6 @@
   --factor-multi: 1.1
 }     
 
-/* .cardPoke {
-    padding: 25px 10px;
-    border: 2px solid red;
-    transition: background-color 0.3s ease;
-    display: flex;
-    place-items: center;
-}
-  
-.cardPoke:hover {
-background-color: #ffeeee;
-color:black
-} */
-
 /* From Uiverse.io by Clenio21 */
 .cardPoke {
   width: calc(190px * var(--factor-multi));

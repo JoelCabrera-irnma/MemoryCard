@@ -17,13 +17,5 @@ function HeaderShow({ props, prop2 }) {
     </div>
   );
 }
-// const sty = {
-//     fontSize: '20px',
-//     color: "black"
-// }
-// const sty2 = {
-//     fontSize: '15px',
-//     color: "black"
-// }
 
 export default HeaderShow;

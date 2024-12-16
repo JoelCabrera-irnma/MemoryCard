@@ -4,7 +4,7 @@ import { generateUniqueRandomNumbers, getRandomElements } from "../auxiliar.js";
 import "../styles/displayCard.css";
 import "../styles/modal.css";
 
-//Array de numeros de aleatorio por ejemplo entre 1 a 200
+//Array de URLs obtenidas en forma aleatoria, por ejemplo entre 1 a 200
 const generateURLs = () => {
   const randomNumbers = generateUniqueRandomNumbers(16, 1, 200); //N° de Pokes consumidos , ID min , ID max
   return randomNumbers.map(
@@ -13,7 +13,7 @@ const generateURLs = () => {
 };
 let score = 0;
 
-function PokeRender({ params, endScore, lastScore }) {
+function PokeRender({ addScore, endScore, lastScore }) {
   const [listBase, setListBase] = useState(null);
   const [pokeList, setPokemonList] = useState(null);
   const [select, setSelect] = useState([]);
@@ -32,10 +32,10 @@ function PokeRender({ params, endScore, lastScore }) {
         );
         const [a, b, c, d] = pokemonData;
 
-        //Set los 32 pokemon de base
+        //Set de los 32 pokemon de base
         setListBase(pokemonData);
 
-        //Set de los primero 4 pokemon
+        //Set de los primero 4 pokemons
         setPokemonList([a, b, c, d]);
       } catch (error) {
         console.error("Error al recuperar los datos:", error);
@@ -44,29 +44,28 @@ function PokeRender({ params, endScore, lastScore }) {
     fetchPokemonData();
   }, [reset]);
 
-  //console.log(lastScore)
-
   const resetValues = () => {
     endScore();
     setSelect([]);
     score = 0;
   };
+
   const selectValue = (value) => {
-    //Fin del Juego
     console.log(value, select);
+    //Fin del Juego
     if (select.includes(value)) {
       handleGameOver();
       resetValues();
       return;
     }
+
     //Reordenar cartas
     setSelect((preValues) => [...preValues, value]); //Corregir. Colocar-push en un array y verificar si existe
     const shuffle = [...pokeList].sort(() => Math.random() - 0.5);
     setPokemonList(shuffle);
-    params(); //sumar score para el componente padre
+    addScore(); //sumar score para el componente padre
     score++;
 
-    //console.log(score, listBase.length)
     //Maximo Valor alcanzado
     if (score == listBase.length) {
       setMaxScore(true);
@@ -74,7 +73,7 @@ function PokeRender({ params, endScore, lastScore }) {
       return console.log("MAXIMO PUNTAJE ALCANZADO");
     }
 
-    //Verificar length del pokeList con el valor del score
+    //Duplicar Cards al terminar el nivel "X"
     if (pokeList.length == score) {
       score = 0;
       const setCardNew = getRandomElements(listBase, 2 * pokeList.length);
@@ -122,7 +121,7 @@ function PokeRender({ params, endScore, lastScore }) {
           maxScore
             ? `Maximo puntaje alcanzado`
             : `Este es tu puntaje: ${lastScore}`
-        } 
+        }
       />
     </>
   );

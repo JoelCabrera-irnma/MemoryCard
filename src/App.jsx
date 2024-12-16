@@ -23,7 +23,7 @@ function App() {
   return (
     <>
       <Header props={score} prop2={bestScore}/>
-      <DisplayCard params={changeScore} endScore={runEndScore} lastScore={scoreGlobal}/>
+      <DisplayCard addScore={changeScore} endScore={runEndScore} lastScore={scoreGlobal}/>
     </>
   )
 }
