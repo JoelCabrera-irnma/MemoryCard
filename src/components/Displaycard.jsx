@@ -13,7 +13,7 @@ const generateURLs = () => {
 };
 let score = 0;
 
-function PokeRender({ addScore, endScore, lastScore }) {
+function PokeRender({ addScore, endScore, lastScore, upLevel }) {
   const [listBase, setListBase] = useState(null);
   const [pokeList, setPokemonList] = useState(null);
   const [select, setSelect] = useState([]);
@@ -73,12 +73,13 @@ function PokeRender({ addScore, endScore, lastScore }) {
       return console.log("MAXIMO PUNTAJE ALCANZADO");
     }
 
-    //Duplicar Cards al terminar el nivel "X"
+    //Duplicar Cards al terminar el nivel "X". Pasa el siguiente nivel
     if (pokeList.length == score) {
       score = 0;
       const setCardNew = getRandomElements(listBase, 2 * pokeList.length);
       setPokemonList(setCardNew);
       setSelect([]);
+      upLevel();
     }
   };
 

@@ -1,11 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
+@font-face {
+  font-family: 'Londrina Shadow';
+  src: url('public/fonts/Londrina_Shadow/LondrinaShadow-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
+.level{
+  font-family: 'Londrina Shadow';
+  font-size: 36px;
+  letter-spacing: 3px;
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 :root{
   --primary_color:#FFC066;
   --secondary_color:#374f1f;
@@ -18,9 +33,9 @@
 }
 
 .brazil{
-  --primary_color:#FFC066;
-  --secondary_color:#6c772e;
-  --third_color:#2a4368;
+  --primary_color:#ffeb0b;
+  --secondary_color:#536dc2;
+  --third_color:#429aa2;
 }
 
 .urss{
@@ -69,15 +84,14 @@
 .box-score{
   font-size:22.5%;
   font-family:roboto;
-  /* width:100vw; */
-  /* background-color:var(--primary_color); */
-  text-transform:uppercase;
   padding:10px;
   padding-top:0px;
   display:flex;
   justify-content:center;
+  gap: 60px;
 }
 .names{
+  text-transform:uppercase;
   background-color:var(--card-color);
   display:flex;
   flex-direction: row;

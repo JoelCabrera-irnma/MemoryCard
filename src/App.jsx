@@ -7,6 +7,7 @@ let scoreGlobal = 0
 function App() {
   const [score, setScore] = useState(0)
   const [bestScore, setBestScore] = useState(0)
+  const [nextLevel, setNextLevel] = useState(1)
 
   const changeScore = () =>{
     setScore(score+1);
@@ -19,11 +20,11 @@ function App() {
     scoreGlobal = score  
     setScore(0)
   }
-  
+  const upLevel = () =>setNextLevel(nextLevel+1)
   return (
     <>
-      <Header props={score} prop2={bestScore}/>
-      <DisplayCard addScore={changeScore} endScore={runEndScore} lastScore={scoreGlobal}/>
+      <Header props={score} prop2={bestScore} addLevel={nextLevel}/>
+      <DisplayCard addScore={changeScore} endScore={runEndScore} lastScore={scoreGlobal} upLevel={upLevel}/>
     </>
   )
 }

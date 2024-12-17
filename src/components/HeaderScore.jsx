@@ -1,7 +1,9 @@
 import "../styles/header.css";
-function HeaderShow({ props, prop2 }) {
+function HeaderShow({ props, prop2, addLevel }) {
+  const levelsWord = ['Trainee','Junior','Midsenior','Senior']
   return (
     <div className="box-score">
+      <div className="level">Nivel {addLevel}</div>
       <div className="names argentina">
         <div className="name_container _1">
           <div className="name_container_name name" data-name="Pelé">
@@ -14,6 +16,7 @@ function HeaderShow({ props, prop2 }) {
           </div>
         </div>
       </div>
+      <div className="level">{levelsWord[addLevel-1]}</div>
     </div>
   );
 }
